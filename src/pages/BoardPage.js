@@ -5,9 +5,12 @@ export default function BoardPage() {
     <div className="board">
       <Toolbar />
       <canvas
+        width={600}
+        height={400}
         id="my-canvas"
         style={{
-          border: "1px solid black",
+          height: "calc(100vh - 5.4rem)",
+          width: "100vw",
         }}
       ></canvas>
     </div>

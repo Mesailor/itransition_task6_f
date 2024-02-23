@@ -9,7 +9,7 @@ export default function BoardsList() {
   ];
   let [boards, setBoards] = useState(fakeBoards);
   return (
-    <div className="boards">
+    <div className="boards container px-2 py-4 d-flex justify-content-around flex-wrap">
       {boards.map((board) => (
         <BoardPreview board={board} />
       ))}

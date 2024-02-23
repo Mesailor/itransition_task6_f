@@ -1,18 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BoardPreview from "./BoardPreview";
+import apiService from "../services/APIService";
 
 export default function BoardsList() {
-  let fakeBoards = [
-    { name: "first board" },
-    { name: "second board" },
-    { name: "third board" },
-  ];
-  let [boards, setBoards] = useState(fakeBoards);
+  let [boards, setBoards] = useState([]);
+
+  useEffect(() => {
+    apiService.getBoards().then((boards) => {
+      setBoards(boards);
+    });
+  }, []);
   return (
     <div className="boards container px-2 py-4 d-flex justify-content-around flex-wrap">
-      {boards.map((board) => (
-        <BoardPreview board={board} />
-      ))}
+      {boards[0]
+        ? boards.map((board) => <BoardPreview key={board.id} board={board} />)
+        : null}
       <button>Add new board icon</button>
     </div>
   );

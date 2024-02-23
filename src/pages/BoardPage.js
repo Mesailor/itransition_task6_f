@@ -9,7 +9,7 @@ export default function BoardPage() {
         height={400}
         id="my-canvas"
         style={{
-          height: "calc(100vh - 5.4rem)",
+          height: "calc(100vh - 4.5rem)",
           width: "100vw",
         }}
       ></canvas>

@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import BoardPage from "./pages/BoardPage";
+import { AppProvider } from "./context/AppContext";
 
 const router = createBrowserRouter([
   {
@@ -8,16 +9,18 @@ const router = createBrowserRouter([
     element: <MainPage />,
   },
   {
-    path: "/board",
+    path: "/board/:id",
     element: <BoardPage />,
   },
 ]);
 
 function App() {
   return (
-    <div className="App" style={{ overflow: "hidden" }}>
-      <RouterProvider router={router} />
-    </div>
+    <AppProvider>
+      <div className="App" style={{ overflow: "hidden" }}>
+        <RouterProvider router={router} />
+      </div>
+    </AppProvider>
   );
 }
 

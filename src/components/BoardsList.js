@@ -1,9 +1,26 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import BoardPreview from "./BoardPreview";
 import apiService from "../services/APIService";
+import { AppContext } from "../context/AppContext";
 
 export default function BoardsList() {
   let [boards, setBoards] = useState([]);
+  let [result, setResult] = useState(false);
+  let { user } = useContext(AppContext);
+
+  async function createBoard() {
+    const newBoard = {
+      title: `${user.name}'s board`,
+    };
+    try {
+      console.log("BOARDLIST: ", newBoard);
+      const data = await apiService.postNewBoard(newBoard);
+      setResult(data.message);
+    } catch (err) {
+      console.log(err);
+      setResult("Something went wrong...");
+    }
+  }
 
   useEffect(() => {
     apiService.getBoards().then((boards) => {
@@ -15,7 +32,7 @@ export default function BoardsList() {
       {boards[0]
         ? boards.map((board) => <BoardPreview key={board.id} board={board} />)
         : null}
-      <button>Add new board icon</button>
+      <button onClick={createBoard}>Add new board icon</button>
     </div>
   );
 }
